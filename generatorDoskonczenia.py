@@ -96,15 +96,15 @@ def transakcjaLotnicza():
 
     if int(ileDestynacji) > 1:
 
-		destynacjeManualAutom = raw_input("(A)utomatycznie, (M)anualnie :  ")
-		dAM = str(destynacjeManualAutom)
-		ileKierunow = "X"
-		if dAM == 'M':
-			ileKierunow = raw_input("(J)ednokierunkowo, (D)wukierunkowo :  ")
-	        kierunki = str(ileKierunow)
+        destynacjeManualAutom = raw_input("(A)utomatycznie, (M)anualnie :  ")
+        dAM = str(destynacjeManualAutom)
+        ileKierunow = "X"
+        if dAM == 'A':
+        	ileKierunow = raw_input("(J)ednokierunkowo, (D)wukierunkowo :  ")
+	    	kierunki = str(ileKierunow)
 	        if kierunki == 'D':
 	            print "Dwukierunkwo"
-	    # dwukierunkowo ----------------------------------------------------------
+	            # dwukierunkowo ---------------------------------------------------
 	            transactionall = open(
 	                tranPath + "/JETBLUE_TRANSACTION_" + myDate + ".csv", "awt")
 	            try:
@@ -121,10 +121,12 @@ def transakcjaLotnicza():
 	                writer.writerow(('T', T))
 	            finally:
 	                transactionall.close()
-	        if kierunki == 'J':
-	            print "Jednokierunkowo"
 
-	    # jednokierunkowo--------------------------------------------------------------
+	        if kierunki == 'J':
+	            print "JednokierunkowoAuto"
+	            print dAM
+
+	            # jednokierunkowo--------------------------------------------------------------
 	        # if int(ileDestynacji) > 1:
 	            transactionall = open(
 	                tranPath + "/JETBLUE_TRANSACTION_" + myDate + ".csv", "awt")
@@ -144,12 +146,13 @@ def transakcjaLotnicza():
 	            finally:
 	                transactionall.close()
 
-	  	elif dAM == 'A':
-			ileKierunow = raw_input("(J)ednokierunkowo, (D)wukierunkowo :  ")
+        if dAM == 'M':
+	        ileKierunow = raw_input("(J)ednokierunkowo, (D)wukierunkowo :  ")
 	        kierunki = str(ileKierunow)
+
 	        if kierunki == 'D':
 	            print "Dwukierunkwo"
-	    # dwukierunkowo ----------------------------------------------------------
+	            # dwukierunkowo ---------------------------------------------------
 	            transactionall = open(
 	                tranPath + "/JETBLUE_TRANSACTION_" + myDate + ".csv", "awt")
 	            try:
@@ -166,11 +169,10 @@ def transakcjaLotnicza():
 	                writer.writerow(('T', T))
 	            finally:
 	                transactionall.close()
-	        if kierunki == 'J':
-	            print "Jednokierunkowo"
 
-	    # jednokierunkowo--------------------------------------------------------------
-	        # if int(ileDestynacji) > 1:
+	        if kierunki == 'J':
+	            print "JednokierunkowoManual"
+	            print dAM
 	            transactionall = open(
 	                tranPath + "/JETBLUE_TRANSACTION_" + myDate + ".csv", "awt")
 
@@ -189,12 +191,6 @@ def transakcjaLotnicza():
 	            finally:
 	                transactionall.close()
 
-
-
-
-
-
-		       	
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -306,7 +302,6 @@ def transakcjaData():
             transactionall.close()
 
 
-
 def membCreate():
     # --------------------------------------------------  tworzenie pliku MEMB
     f = open(usrPath + "/JETBLUE_MEMBERS_" + myDate + ".csv", "a")
@@ -351,11 +346,11 @@ else:
 
 typTransakcji = raw_input(
     "Typ Transakcji (L)otnicza , (P)artnerska, (T)erminowa  : ")
-if typTransakcji == 'L':    
+if typTransakcji == 'L':
     transakcjaLotnicza()
-if typTransakcji == 'P': 
+if typTransakcji == 'P':
     transakcjaPartnerska()
-if typTransakcji == 'T': 
+if typTransakcji == 'T':
     transakcjaData()
 
 
